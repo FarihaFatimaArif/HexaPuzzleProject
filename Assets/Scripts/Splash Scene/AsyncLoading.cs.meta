@@ -3,7 +3,11 @@ guid: e16da6d2ef3c54f5bba2cc26ce398b8c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - LoadingBar: {instanceID: 0}
+  - AdSystem: {fileID: 11400000, guid: 0c4a41ff2dcca4780b6385b218938f42, type: 2}
+  - IAPShop: {fileID: 11400000, guid: f13f7af749cde44c5868c5fcc40cdb4a, type: 2}
+  - RewardGranted: {fileID: 11400000, guid: 75ceda2a72c774362ab2df124da9b515, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

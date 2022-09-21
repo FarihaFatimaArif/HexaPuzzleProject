@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6c4c093c8e94a16a0cb3a469662e4b, type: 3}
   m_Name: RewardGranted
   m_EditorClassIdentifier: 
-  RemoveAds: 0
+  PlayerPrefKeys: {fileID: 11400000, guid: 12bf73a885ab3483992590c0b4eaf808, type: 2}
+  RemoveAds: 1
   NoOfCoins: 0
-  NoOfSkips: 0
+  NoOfSkips: 15

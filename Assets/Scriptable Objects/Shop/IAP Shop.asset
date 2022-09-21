@@ -17,9 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78d6f5e7d62974bfa86fa63f2f8c95af, type: 2}
   - {fileID: 11400000, guid: be154bb59a81d4b8997a5311e47aab4f, type: 2}
   - {fileID: 11400000, guid: 24263fd77fc7543a4a5a727eecb72e32, type: 2}
-  - {fileID: 11400000, guid: 24263fd77fc7543a4a5a727eecb72e32, type: 2}
-  - {fileID: 11400000, guid: 24263fd77fc7543a4a5a727eecb72e32, type: 2}
-  - {fileID: 11400000, guid: 24263fd77fc7543a4a5a727eecb72e32, type: 2}
-  - {fileID: 11400000, guid: 24263fd77fc7543a4a5a727eecb72e32, type: 2}
-  FakeStoreUIMode: 0
+  - {fileID: 11400000, guid: 9ddd1982f6a7c492290159e61db2baec, type: 2}
+  FakeStoreUIMode: 1
+  OneButtonPopupSo: {fileID: 11400000, guid: 34d1d372da31b430ebd8d21f67d1b184, type: 2}
   IAPInProgress: 1

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "ScriptableObject/HexGridSystem", order = 1, fileName = "HexGrid")]
 public class HexaGrid : ScriptableObject
@@ -11,6 +12,8 @@ public class HexaGrid : ScriptableObject
     [SerializeField] int Width = 5;
     [SerializeField] int Height = 5;
     [SerializeField] List<Sprite> TilesSprites;
+    [SerializeField] AdSystem AdSystem;
+    [SerializeField] TwoButtonPopupSO TwoButtonPopupSO;
     int maxHexes = 25;
     float xOffset = 1f;
     float yOffset = 0.866f;
@@ -74,77 +77,6 @@ public class HexaGrid : ScriptableObject
     // Start is called before the first frame update
     void Start()
     {
-        //Vector3 tilePosition;
-        //Hexes.Clear();
-        //Vector2 tempvec = new Vector2();
-        //HexesList.Clear();
-        //for (int x = 0; x < Width; x++)
-        //{
-        //    for (int y = 0; y < Height; y++)
-        //    {
-        //        HexData temp = new HexData();
-        //        if (y % 2 == 0)
-        //        {
-        //            xPos = x * xOffset;
-        //            yPos = y * yOffset;
-        //            tilePosition.x = xPos;
-        //            tilePosition.y = yPos;
-        //            tilePosition.z = 0;
-        //            if (!once)
-        //            {
-        //                tileGenerated = (GameObject)Instantiate(Tile, tilePosition, Quaternion.identity);
-        //            }
-        //            else
-        //            {
-        //                tileGenerated = (GameObject)Instantiate(tileGenerated, tilePosition, Quaternion.identity);
-        //            }
-        //            tileGenerated.name = "Hex_" + x + "_" + y;
-        //            tileGenerated.transform.SetParent(this.transform);
-        //            temp.Hex = tileGenerated;
-        //            temp.Index = index;
-        //            Debug.Log("index" + index);
-        //            Debug.Log("id" + tileGenerated.name);
-        //            temp.Id = tileGenerated.name;
-        //            tempvec.x = x;
-        //            tempvec.y = y;
-        //            Hexes.Add(tempvec, temp);
-
-        //            //hexGridPos.Add(tempvec);
-        //            HexesList.Add(temp);
-        //        }
-        //        else if (x<Width-1)
-        //        {
-        //            xPos = x * xOffset;
-        //            xPos += xOffset / 2f;
-        //            yPos = y * yOffset;
-        //            tilePosition.x = xPos;
-        //            tilePosition.y = yPos;
-        //            tilePosition.z = 0;
-        //            tileGenerated = (GameObject)Instantiate(Tile, tilePosition, Quaternion.identity);
-        //            tileGenerated.name = "Hex_" + x + "_" + y;
-        //            tileGenerated.transform.SetParent(this.transform);
-        //            temp.Hex = tileGenerated;
-        //            temp.Index = index;
-        //            temp.Id = tileGenerated.name;
-        //            tempvec.x = x;
-        //            tempvec.y = y;
-        //            Hexes.Add(tempvec, temp);
-        //            HexesList.Add(temp);
-        //            tempvec.x = x;
-        //            tempvec.y = y;
-        //            //hexGridPos.Add(tempvec);
-        //            Debug.Log("index" + index);
-        //            Debug.Log("id" + tileGenerated.name);
-        //        }
-        //        else if(x==Width-1)
-        //        {
-        //            HexesList.Add(temp);
-        //        }
-        //        index++;
-
-        //    }
-        //}
-        //Debug.Log("n2c" + Neighbours2.cCount);
         GenerateGrid();
         PrintNeighbours();
     }
@@ -209,7 +141,30 @@ public class HexaGrid : ScriptableObject
 
         PopulateNeighbours();
     }
-
+    public void IsGridFill()
+    {
+        bool notOccupied = false;
+        foreach (var pair in HexAtPosition)
+        {
+            if(!pair.Value.Occupied)
+            {
+                notOccupied = true;
+                break;
+            }
+        }
+        if(!notOccupied)
+        {
+            AdSystem.OnQuitAd();
+            Debug.Log("fail");
+            TwoButtonPopupSO.FailYes += ResetGrid;
+            TwoButtonPopupSO.Fail.Invoke();
+        }
+    }
+    public void ResetGrid()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        TwoButtonPopupSO.Hidepopup.Invoke();
+    }
     public HexData GetHexAtPosition(Vector2 position)
     {
         foreach (var otherPair in HexAtPosition)
@@ -351,10 +306,11 @@ public class HexaGrid : ScriptableObject
                 Debug.Log(pair.HexTile.Tier);
                 pair.HexTile.TileObj.GetComponent<SpriteRenderer>().sprite = TilesSprites[pair.HexTile.Tier];
                 pair.HexTile.Tier = pair.HexTile.Tier + 1;
+               
             }
             else
             {
-
+                pair.Occupied = false;
                 pair.Hex.transform.DetachChildren();
                 pair.HexTile.TileObj.SetActive(false);
                 pair.HexTile.Tier = -1;
@@ -367,19 +323,7 @@ public class HexaGrid : ScriptableObject
         }
        }
 
-        public void ResetColor(List<GameObject> temp)
-    {
-       /* int i = 0;
-        foreach (var pair in tiles)
-        {
-            if (temp[i]!==pair.)
-            {
-                pair.Value.GetComponent<SpriteRenderer>().color = Color.white;
-                Debug.Log("Yrrr");
-            }
-            i++;
-        } */
-    }
+
     //public void searching(HexData hex)
     //{
     //    InqueueHexes.Clear();

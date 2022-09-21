@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AdSystem
   m_EditorClassIdentifier: 
   RewardGranted: {fileID: 11400000, guid: 75ceda2a72c774362ab2df124da9b515, type: 2}
+  OneButtonPopupSo: {fileID: 11400000, guid: 34d1d372da31b430ebd8d21f67d1b184, type: 2}
   RewardedAdDone:
     m_PersistentCalls:
       m_Calls:

@@ -8,6 +8,8 @@ public class TileSpawner : MonoBehaviour
     int tileT1;
     int tileT2;
     [SerializeField] Vector3 InitialPos;
+    [SerializeField] GameObject Arrow1;
+    [SerializeField] GameObject Arrow2;
     GameObject tile1;
     GameObject tile2;
    // GameObject parent;
@@ -35,9 +37,12 @@ public class TileSpawner : MonoBehaviour
             tile2.tag = "New Tile";
             tile1.GetComponent<SpriteRenderer>().sortingOrder = 2;
             tile2.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            Arrow1.SetActive(true);
+            Arrow2.SetActive(true);
         }
         else
         {
+
             InitialPos.x = InitialPos.x + 0.5f;
             tileT1 = Random.Range(1, 5);
             // NewTileParent = Instantiate(NewTileParent, NewTileParent.transform.position, Quaternion.identity);
@@ -46,6 +51,8 @@ public class TileSpawner : MonoBehaviour
             tile1.tag = "New Tile";
             tile1.transform.SetParent(NewTileParent.transform);
             tile1.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            Arrow1.SetActive(false);
+            Arrow2.SetActive(false);
         }
     }
 

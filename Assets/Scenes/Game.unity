@@ -405,6 +405,8 @@ MonoBehaviour:
   TileGlow: {fileID: 0}
   TileBg: {fileID: 0}
   AdSystem: {fileID: 0}
+  TwoButtonPopupSO: {fileID: 0}
+  RewardGranted: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   TileParentObj: {fileID: 0}
   HexaGrid: {fileID: 0}
@@ -596,7 +598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &830525020
 Transform:
   m_ObjectHideFlags: 0
@@ -914,9 +916,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1840656264}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Reset
+      - m_Target: {fileID: 1693415919}
+        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
+        m_MethodName: OnResetClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1168,7 +1170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1693415918}
-  - component: {fileID: 1693415917}
+  - component: {fileID: 1693415919}
   m_Layer: 0
   m_Name: ChangeScene
   m_TagString: Untagged
@@ -1176,18 +1178,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1693415917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693415916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a763cd4e0916c43aabcbac76b842eb9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1693415918
 Transform:
   m_ObjectHideFlags: 0
@@ -1203,6 +1193,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1693415919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693415916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a763cd4e0916c43aabcbac76b842eb9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TwoButtonPopupSO: {fileID: 11400000, guid: cc7f39669253547989a4df8315e05048, type: 2}
+  AdSystem: {fileID: 11400000, guid: 0c4a41ff2dcca4780b6385b218938f42, type: 2}
 --- !u!1 &1727829266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1770245861
 Transform:
   m_ObjectHideFlags: 0
@@ -1505,21 +1509,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1693415917}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Splash
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 0c4a41ff2dcca4780b6385b218938f42, type: 2}
-        m_TargetAssemblyTypeName: AdSystem, Assembly-CSharp
-        m_MethodName: OnQuitAd
+      - m_Target: {fileID: 1693415919}
+        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
+        m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1710,6 +1702,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPos: {x: 0, y: 0, z: 0}
+  Arrow1: {fileID: 830525019}
+  Arrow2: {fileID: 1770245860}
   TilePrefabs:
   - {fileID: 837575669029532733, guid: cb4527b6420784b0e974f56e6978542a, type: 3}
   - {fileID: 837575669029532733, guid: b96dd6123d8ab40929cb8b7a829eb1ba, type: 3}
@@ -1774,6 +1768,8 @@ MonoBehaviour:
   TileGlow: {fileID: 21300000, guid: 1a346f34df7014833a98bd30d5da0844, type: 3}
   TileBg: {fileID: 21300000, guid: 53032311e98fb407faf092604756b79f, type: 3}
   AdSystem: {fileID: 11400000, guid: 0c4a41ff2dcca4780b6385b218938f42, type: 2}
+  TwoButtonPopupSO: {fileID: 11400000, guid: cc7f39669253547989a4df8315e05048, type: 2}
+  RewardGranted: {fileID: 11400000, guid: 75ceda2a72c774362ab2df124da9b515, type: 2}
   initialPos: {x: 0, y: 0, z: 0}
   TileParentObj: {fileID: 2078988329}
   HexaGrid: {fileID: 11400000, guid: 247030d186d0b4643966eb852524d0df, type: 2}

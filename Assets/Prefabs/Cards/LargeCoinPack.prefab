@@ -496,8 +496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AdSystem: {fileID: 11400000, guid: 0c4a41ff2dcca4780b6385b218938f42, type: 2}
+  PrefKeys: {fileID: 11400000, guid: 12bf73a885ab3483992590c0b4eaf808, type: 2}
   RewardGranted: {fileID: 11400000, guid: 75ceda2a72c774362ab2df124da9b515, type: 2}
   IAPShop: {fileID: 11400000, guid: f13f7af749cde44c5868c5fcc40cdb4a, type: 2}
+  OneButtonPopupSo: {fileID: 11400000, guid: 34d1d372da31b430ebd8d21f67d1b184, type: 2}
   UpdateRewards:
     m_PersistentCalls:
       m_Calls: []

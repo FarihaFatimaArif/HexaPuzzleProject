@@ -10,7 +10,7 @@ public class IAPShop : ScriptableObject, IStoreListener
 {
     public List<IAPItem> RewardItems;
     [SerializeField] private FakeStoreUIMode FakeStoreUIMode;
-
+    [SerializeField] OneButtonPopupSo OneButtonPopupSo;
     public bool IAPInProgress = false;
 
 
@@ -48,7 +48,7 @@ public class IAPShop : ScriptableObject, IStoreListener
             _purchasingModule.useFakeStoreUIMode = FakeStoreUIMode;
 
             _configurationBuilder = ConfigurationBuilder.Instance(_purchasingModule);
-            _configurationBuilder.AddProducts(RewardItems.Select(x => x.ProductDefinition));
+            _configurationBuilder.AddProducts(RewardItems.Select(x => x.ProductDefinition).Where(x=> x.id is not ""));
         }
     }
 
@@ -105,6 +105,7 @@ public class IAPShop : ScriptableObject, IStoreListener
         }
 
         _purchaseListener = null;
+        OneButtonPopupSo.PurchaseUnsuccessfull.Invoke();
     }
 
     private void AssignProductsToItems()

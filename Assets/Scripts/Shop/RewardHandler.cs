@@ -6,29 +6,35 @@ using UnityEngine.Events;
 
 public class RewardHandler : MonoBehaviour, IItemPurchase
 {
-    //[SerializeField] Button RemoveAdsBtn;
-    //[SerializeField] Button SmallPackBtn;
-    //[SerializeField] Button LargePackBtn;
-    //[SerializeField] Button SpecialPackBtn;
     [SerializeField] AdSystem AdSystem;
     public UnityAction ShowRewardAction;
+    [SerializeField] PlayerPrefKeys PrefKeys;
     [SerializeField] RewardGranted RewardGranted;
     [SerializeField] IAPShop IAPShop;
-    //[SerializeField] ShowRewards ShowRewards;
+    [SerializeField] OneButtonPopupSo OneButtonPopupSo;
     public UnityEvent UpdateRewards;
-    //[SerializeField] IAPItem IAPItem;
     private void Start()
     {
-        //RemoveAdsBtn = IAPShop.RewardItems[0].Card.GetComponent<Button>();
-        //RemoveAdsBtn.onClick.AddListener(RemoveAds);
-        //SmallPackBtn.onClick.AddListener(SmallCoinPack);
-        //LargePackBtn.onClick.AddListener(LargeCoinPack);
-        //SpecialPackBtn.onClick.AddListener(SpecialCoinPack);
-
     }
     void PurchaseFail(IAPItem iAPItem)
     {
         
+    }
+    public void RestorePurchase()
+    {
+        OneButtonPopupSo.PurchaseRestored.Invoke();
+    }
+    //add coin fun in reward granted, set pref fun in prefkeys
+    public void RewardedAdPackSuccess()
+    {
+        RewardGranted.NoOfCoins += 100;
+        PlayerPrefs.SetInt(PrefKeys.Coins, RewardGranted.NoOfCoins);
+        PlayerPrefs.Save();
+    }
+    public void RewardedCoinPack()
+    {
+        AdSystem.RewardAction = RewardedAdPackSuccess;
+        AdSystem.OnRewardedAdPack();
     }
     public void RemoveAds()
     {
@@ -54,22 +60,29 @@ public class RewardHandler : MonoBehaviour, IItemPurchase
             if(pair.RewardType == RewardType.Coins)
             {
                 RewardGranted.NoOfCoins += pair.Amount;
+                PlayerPrefs.SetInt(PrefKeys.Coins, RewardGranted.NoOfCoins);
+                PlayerPrefs.Save();
             }
             else if(pair.RewardType == RewardType.Skips)
             {
                 RewardGranted.NoOfSkips += pair.Amount;
+                PlayerPrefs.SetInt(PrefKeys.Skips, RewardGranted.NoOfSkips);
+                PlayerPrefs.Save();
             }
             else if(pair.RewardType == RewardType.RemoveAds)
             {
                 RewardGranted.RemoveAds = true;
+                PlayerPrefs.SetInt(PrefKeys.RemoveAds, 1);
+                PlayerPrefs.Save();
             }
         }
-       // ShowRewards.UpdateRewards();
+        OneButtonPopupSo.PurchaseSuccessfull.Invoke();
         UpdateRewards.Invoke();
     }
 
     void IItemPurchase.PurchaseFail(IAPItem iAPItem)
     {
-        throw new System.NotImplementedException();
+        OneButtonPopupSo.PurchaseUnsuccessfull.Invoke();
+        //throw new System.NotImplementedException();
     }
 }

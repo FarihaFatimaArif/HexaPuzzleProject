@@ -10,7 +10,8 @@ public class TileController : MonoBehaviour, IInputSystem
     [SerializeField] Sprite TileGlow;
     [SerializeField] Sprite TileBg;
     [SerializeField] AdSystem AdSystem;
-
+    [SerializeField] TwoButtonPopupSO TwoButtonPopupSO;
+    [SerializeField] RewardGranted RewardGranted;
     float startTime;
     float distance;
     Camera MianCam;
@@ -201,13 +202,26 @@ public class TileController : MonoBehaviour, IInputSystem
         {
             ReturnToPosition(touch);
         }
+        HexaGrid.IsGridFill();
     }
 
     public void SkipButton()
     {
-        skip();
+        if (RewardGranted.NoOfSkips == 0)
+        {
+            AdSystem.RewardAction = skip;
+            TwoButtonPopupSO.SkipYes += AdSystem.OnRewardAdSkip;
+            TwoButtonPopupSO.Skip.Invoke();
+            //AdSystem.RewardAction = skip;
+        }
+        else
+        {
+            AdSystem.RewardAction = skip;
+            AdSystem.OnRewardAdSkip();
+        }
+        //skip();
         //AdSystem.RewardAction = skip;
-        //AdSystem.OnRewardAd();
+        //AdSystem.OnRewardAdSkip();
     }
     void skip()
     {
@@ -220,6 +234,8 @@ public class TileController : MonoBehaviour, IInputSystem
         }
         SpawnTile.Invoke();
         SkippedTile.Invoke();
+        TwoButtonPopupSO.Hidepopup.Invoke();
+        RewardGranted.WriteRewards();
     }
         
 }

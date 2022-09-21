@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     TileController TileControllerRef;
     [SerializeField] LifeSystem life;
     [SerializeField] AdSystem AdSystem;
+    //[SerializeField] RewardGranted RewardGranted;
     InputController InputControllerRef;
     [SerializeField] HexaGrid HexaGrifRef;
     TileSpawner tileSpawner;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         //HexaGrifRef.PrintNeighbours();
         //TileControllerRef.InitializatingGrid(HexaGrifRef);
         TileControllerRef.InitializingTiles();
+       // RewardGranted.ReadRewards();
     }
     void SkipTile()
     {

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ee286a5aa53472cbcc103c38136d0f, type: 3}
+  m_Name: RewardedCoinPack
+  m_EditorClassIdentifier: 
+  SKU: 
+  Title: Rewarded Coin PAck
+  Price: 0
+  Rewards:
+  - Amount: 100
+    Icon: {fileID: 0}
+    RewardType: 0
+  ProductType: 0
+  Card: {fileID: 7470475818363593078, guid: aeeaaf4fb13294ed287342853746a05f, type: 3}
